@@ -84,9 +84,9 @@ insert into Edicion values(755,'2011-03-01','2011-03-31',315,984);
 insert into Edicion values(756,'2011-05-01','2011-05-31',432,986);
 insert into Edicion values(757,'2011-03-01','2011-03-31',315,987);
 insert into Edicion values(111,'2011-03-01','2011-03-31',315,987);
-delete from edicion 
+/*delete from edicion ;*/
 
-select * from edicion;
+select * from edicion
 
 where id=111 ;
 create table Nota(
@@ -117,15 +117,19 @@ insert into Nota values(754,444,70);
 insert into Nota values(754,555,100);
 
 /*MOSTRAR TODOS LOS ALUMNOS QUE HAN LLEVADO UN CURSO DEL TEMA 'PROCEDIMIENTOS AND FUNCIONES'*/
-select * from Empleado,tema,edicion,curso,nota
-where  Descrp ='PROCEDIMIENTOS AND FUNCIONES'and IDtema=tema.id 
-and curso.cod=edicion.codcurso and idedicion=edicion.id 
-and cialum= empleado.ci;/*tema , empleado, curso ,edicion*/
+SELEcT empleado.nombre,empleado.ci
+FROM empleado,curso,edicion,tema,nota
+WHERE empleado.ci=nota.cialum and
+edicion.id=nota.idedicion and
+curso.cod=edicion.codcurso and
+tema.id=curso.idtema and descrp='PROCEDIMIENTOS AND FUNCIONES';
+
 
 /*MOSTRAR LA CANTIDAD DE EDICIONES POR CADA CURSO*/
 SELECT titulo, count(edicion.ID) as ediciones /*se selecciona el atributo titulo y se hace la cuenta ahi */
 FROM curso,edicion /*las tablas dque se van a utilizar*/
 WHERE curso.cod=codcurso /*hace el enlace entre tablas*/
-group by titulo /*para que no se repitan los elementos de esta tabla*/
+group by titulo; /*para que no se repitan los elementos de esta tabla*/
 
+/*MOSTRAR CANTIDAD */
 drop database formacion;
